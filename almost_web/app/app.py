@@ -63,7 +63,7 @@ def api_post():
 
 @app.route("/api", methods=["GET", "POST"])
 def api():
-	if request.method == "GET":
+	if request.method in ["GET", "HEAD"]:
 		return api_get()
 	if request.method == "POST":
 		return api_post()
