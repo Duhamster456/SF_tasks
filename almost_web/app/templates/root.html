@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+        }
+        h1 {
+            color: rgb(0, 0, 0);
+            text-align: center;
+        }
+        .highlight {
+    position: relative;
+    display: inline-block;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 
+        0 0 10px #ff00de,
+        0 0 20px #ff00de,
+        0 0 30px #ff00de;
+    background: linear-gradient(45deg, #ff0066, #ff00de);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: neon-pulse 1.5s ease-in-out infinite;
+    transform: scale(1);
+    transition: transform 0.3s;
+}
+
+.highlight::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: inherit;
+    filter: blur(15px);
+    opacity: 0.7;
+    z-index: -1;
+    border-radius: 20px;
+}
+
+.highlight::after {
+    content: '✨';
+    position: absolute;
+    top: -15px;
+    right: -20px;
+    font-size: 20px;
+    animation: sparkle 1s ease-in-out infinite;
+}
+
+@keyframes neon-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; text-shadow: 0 0 20px #ff00de, 0 0 40px #ff00de; }
+}
+
+@keyframes sparkle {
+    0%, 100% { transform: rotate(0deg) scale(1); opacity: 1; }
+    50% { transform: rotate(10deg) scale(1.2); opacity: 0.8; }
+}
+    </style>
+</head>
+<body>
+    <h1>Похоже, Вы ищете <span class="highlight">флаг</span></h1>
+    <p>Для этого обратитесь по пути /api</p>
+</body>
+</html>

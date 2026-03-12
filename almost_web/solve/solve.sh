@@ -1,0 +1,5 @@
+curl -X POST 127.0.0.1:1234/api \
+  -H "Content-Type: application/json" \
+  -H "X-Forwarded-For: 127.0.0.1" \
+  -H "User-Agent: Mozilla" \
+  -d '{"get_flag": true}'
