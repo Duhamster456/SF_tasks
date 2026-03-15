@@ -60,6 +60,7 @@ def api_post():
 		return ERR_NOT_BROWSER, 403
 	if data.get("get_flag") == True:
 		return FLAG
+	return ERR_INCORRECT_DATA
 
 @app.route("/api", methods=["GET", "POST"])
 def api():
