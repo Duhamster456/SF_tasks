@@ -1,54 +1,21 @@
 networks:
-  private:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 192.168.1.0/24
   public:
     driver: bridge
+    driver_opts:
+      parent: eth0
     ipam:
       config:
-        - subnet: 88.88.88.0/24
+        - subnet: 8.40.27.0/24
 services:
-  router:
-    image: alpine:latest
-    container_name: router
-    command: >
-      sh -c "
-        apk add iptables &&
-        echo 1 > /proc/sys/net/ipv4/ip_forward &&
-        iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE &&
-        iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT &&
-        iptables -A FORWARD -i eth0 -o eth1 -m state --state RELATED,ESTABLISHED -j ACCEPT &&
-        tail -f /dev/null
-      "
+  victim:
+    container_name: victim
+    build: ./victim
     networks:
       public:
-        ipv4_address: 88.88.88.10
-      private:
-        ipv4_address: 192.168.1.10
-    privileged: true
-  victim:
-    image: alpine:latest
-    container_name: victim
-    command: >
-      sh -c "
-      ip route del default via 192.168.1.1 ;
-      ip route add default via 192.168.1.10 ;
-      tail -f /dev/null
-      "
-    networks:
-      private:
-        ipv4_address: 192.168.1.100
-    depends_on:
-      - router
-    cap_add:
-    - NET_ADMIN
+        ipv4_address: 8.40.27.10
   c2c:
-    image: nginx:alpine
+    build: ./c2c
     container_name: c2c
     networks:
       public:
-        ipv4_address: 88.88.88.100
-    depends_on:
-      - router
+        ipv4_address: 8.40.27.100
