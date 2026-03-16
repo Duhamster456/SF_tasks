@@ -1,6 +1,5 @@
 #!/bin/sh
 
-tail -f /dev/null
 sleep 5
 {
   echo "whoami"
