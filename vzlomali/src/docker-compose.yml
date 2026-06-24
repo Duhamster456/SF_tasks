@@ -1,0 +1,21 @@
+networks:
+  public:
+    driver: bridge
+    driver_opts:
+      parent: eth0
+    ipam:
+      config:
+        - subnet: 8.0.0.0/8
+services:
+  vuln:
+    container_name: vuln
+    build: ./vuln
+    networks:
+      public:
+        ipv4_address: 8.40.27.10
+  hacker:
+    build: ./hacker
+    container_name: hacker
+    networks:
+      public:
+        ipv4_address: 8.29.218.101
