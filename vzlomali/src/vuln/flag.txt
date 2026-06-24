@@ -1,1 +1,1 @@
-FLAG{}
+FLAG{such_a_str0ng3_n0m3}
